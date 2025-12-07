@@ -1995,3 +1995,9 @@ def test_num_columns(table):
     """Test that Tables returns right number of columns"""
     number = table.num_columns
     assert number == 3
+
+def test_with_columns(table):
+    """Test that with_columns returns self if no labels_and_values passed"""
+    t = table.with_columns()
+
+    assert table is t
