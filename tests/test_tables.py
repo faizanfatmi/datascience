@@ -1995,3 +1995,17 @@ def test_num_columns(table):
     """Test that Tables returns right number of columns"""
     number = table.num_columns
     assert number == 3
+
+def test_split(table):
+    """Test that split copies over the _formats variable from the original table to the new tables correctly after splitting"""
+
+    #defined a custom formatter for points column
+    def positive_point_formatter(value):
+        return f"+{value}"
+    
+    table.set_format("points", positive_point_formatter)
+    
+    t1, t2 = table.split(2)
+    
+    assert t1._formats == table._formats
+    assert t2._formats == table._formats
