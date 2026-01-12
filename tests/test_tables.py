@@ -2009,3 +2009,9 @@ def test_split(table):
     
     assert t1._formats == table._formats
     assert t2._formats == table._formats
+
+def test_with_columns(table):
+    """Test that with_columns returns self if no labels_and_values passed"""
+    t = table.with_columns()
+
+    assert table is t
