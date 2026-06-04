@@ -162,12 +162,21 @@ def test_marker_copy():
 
 def test_background_color_condition_white():
     marker = ds.Marker(0, 0, color='#ffffff')
-    assert marker._folium_kwargs['icon'].options['text_color'] == 'gray'
+
+text_color = marker._folium_kwargs['icon'].options.get('text_color')
+if text_color is None:
+    text_color = marker._folium_kwargs['icon'].options.get('textColor')
+
+assert text_color == 'gray'
 
 def test_background_color_condition_not_white():
-    # Test the condition when the background color is not white
     marker = ds.Marker(0, 0, color='#ff0000')
-    assert marker._folium_kwargs['icon'].options['text_color'] == 'white'
+
+text_color = marker._folium_kwargs['icon'].options.get('text_color')
+if text_color is None:
+    text_color = marker._folium_kwargs['icon'].options.get('textColor')
+
+assert text_color == 'white'
 
 def test_icon_args_icon_not_present():
     # Test when 'icon' key is not present in icon_args
